@@ -6,8 +6,20 @@
 //  Copyright (c) 2016 Tomas Cordoba. All rights reserved.
 //
 
+#import "TCNumbersTableViewController.h"
 @import UIKit;
 
 @interface TCViewController : UIViewController
+
+@property(nonatomic,retain)NSMutableArray *digitsHours;
+@property(nonatomic,retain)NSMutableArray *digitsMinutes;
+
+@property (weak, nonatomic) TCNumbersTableViewController *hoursView;
+@property (weak, nonatomic) TCNumbersTableViewController *minutesView;
+
+- (IBAction)minutesUpAction:(id)sender;
+- (IBAction)minutesDownAction:(id)sender;
+- (IBAction)hoursUpAction:(id)sender;
+- (IBAction)hoursDownAction:(id)sender;
 
 @end

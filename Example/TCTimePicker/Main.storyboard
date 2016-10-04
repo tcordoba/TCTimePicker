@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="whP-gf-Uak">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="whP-gf-Uak">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,12 +17,119 @@
                     <view key="view" contentMode="scaleToFill" id="TpU-gO-2f1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b87-3Q-OHD">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m2a-Fv-mG0">
+                                        <rect key="frame" x="0.0" y="0.0" width="282.5" height="600"/>
+                                        <connections>
+                                            <segue destination="ikB-oD-vUe" kind="embed" identifier="hoursSegue" id="1F3-hG-hff"/>
+                                        </connections>
+                                    </containerView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfR-Wb-Wm0">
+                                        <rect key="frame" x="282.5" y="0.0" width="35" height="600"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYM-bw-IQU">
+                                                <rect key="frame" x="-0.5" y="140" width="35" height="140"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="140" id="x7o-74-UWh"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="125"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="AYM-bw-IQU" firstAttribute="centerX" secondItem="cfR-Wb-Wm0" secondAttribute="centerX" id="QOq-cg-gqP"/>
+                                            <constraint firstItem="AYM-bw-IQU" firstAttribute="top" secondItem="cfR-Wb-Wm0" secondAttribute="top" constant="140" id="hA1-Pf-4gS"/>
+                                            <constraint firstAttribute="width" secondItem="AYM-bw-IQU" secondAttribute="width" id="qa0-pY-JFn"/>
+                                        </constraints>
+                                    </view>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tmR-6T-wqQ">
+                                        <rect key="frame" x="317.5" y="0.0" width="282.5" height="600"/>
+                                        <connections>
+                                            <segue destination="ikB-oD-vUe" kind="embed" identifier="minutesSegue" id="KBh-bO-VGv"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tmR-6T-wqQ" firstAttribute="width" secondItem="m2a-Fv-mG0" secondAttribute="width" id="Nzi-Sw-XQj"/>
+                                </constraints>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xj9-4x-iKd">
+                                <rect key="frame" x="0.0" y="440" width="600" height="160"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="b87-3Q-OHD" firstAttribute="top" secondItem="TpU-gO-2f1" secondAttribute="top" id="2si-Mt-5Vc"/>
+                            <constraint firstAttribute="bottom" secondItem="b87-3Q-OHD" secondAttribute="bottom" id="7rc-HE-JsG"/>
+                            <constraint firstItem="xj9-4x-iKd" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="420" id="BAc-NK-Mgx"/>
+                            <constraint firstItem="b87-3Q-OHD" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leading" id="ChM-IF-13L"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xj9-4x-iKd" secondAttribute="trailing" constant="-20" id="TDE-iT-l1T"/>
+                            <constraint firstItem="Mvr-aV-6Um" firstAttribute="top" secondItem="xj9-4x-iKd" secondAttribute="bottom" id="Tr7-ct-5k0"/>
+                            <constraint firstAttribute="trailing" secondItem="b87-3Q-OHD" secondAttribute="trailing" id="kap-bV-neh"/>
+                            <constraint firstItem="xj9-4x-iKd" firstAttribute="leading" secondItem="TpU-gO-2f1" secondAttribute="leadingMargin" constant="-20" id="xk3-vq-uvf"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="cN2-F3-mEc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="433"/>
+            <point key="canvasLocation" x="433" y="488"/>
+        </scene>
+        <!--Numbers Table View Controller-->
+        <scene sceneID="bqn-PF-iyR">
+            <objects>
+                <tableViewController id="ikB-oD-vUe" customClass="TCNumbersTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="140" sectionHeaderHeight="1" sectionFooterHeight="1" id="owo-i7-DrP">
+                        <rect key="frame" x="0.0" y="0.0" width="282.5" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TCNumberViewCell" rowHeight="140" id="rXq-y5-DWV" customClass="TCNumberViewCell">
+                                <rect key="frame" x="0.0" y="1" width="282.5" height="140"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rXq-y5-DWV" id="GVg-Ya-qZH">
+                                    <rect key="frame" x="0.0" y="0.0" width="282.5" height="140"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCt-To-KmO">
+                                            <rect key="frame" x="72" y="0.5" width="139" height="139"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="139" id="Osr-nw-ENg"/>
+                                                <constraint firstAttribute="width" constant="139" id="XPN-ho-hQh"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="125"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="RCt-To-KmO" firstAttribute="centerY" secondItem="GVg-Ya-qZH" secondAttribute="centerY" id="5xK-vG-N1f"/>
+                                        <constraint firstItem="RCt-To-KmO" firstAttribute="centerX" secondItem="GVg-Ya-qZH" secondAttribute="centerX" id="Ahp-JF-niB"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="numberLabel" destination="RCt-To-KmO" id="sgX-We-IQN"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="ikB-oD-vUe" id="lcv-kF-DJs"/>
+                            <outlet property="delegate" destination="ikB-oD-vUe" id="Sm2-0H-J6u"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7BL-NM-AMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="433.5" y="1221"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="KBh-bO-VGv"/>
+    </inferredMetricsTieBreakers>
 </document>

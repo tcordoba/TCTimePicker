@@ -1,0 +1,22 @@
+{
+  "name": "TCTimePicker",
+  "version": "0.1.0",
+  "summary": "A short description of TCTimePicker.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/TCTimePicker",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Tomas Cordoba": "tomas.cordoba@seitwerk.de"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/TCTimePicker.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "TCTimePicker/Classes/**/*"
+}

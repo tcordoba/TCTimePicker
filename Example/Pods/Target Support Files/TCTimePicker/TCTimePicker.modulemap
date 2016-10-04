@@ -1,0 +1,6 @@
+framework module TCTimePicker {
+  umbrella header "TCTimePicker-umbrella.h"
+
+  export *
+  module * { export * }
+}
