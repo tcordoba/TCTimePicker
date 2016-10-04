@@ -11,6 +11,5 @@
 @interface TCNumbersTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic,retain)NSMutableArray *digits;
-@property (nonatomic, assign) Boolean addZeros;
 @property (nonatomic, assign) int _currentItem;
 @end

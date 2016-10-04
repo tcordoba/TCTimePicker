@@ -19,19 +19,28 @@
 {
     [super viewDidLoad];
     
+    // Set actual hour and minutes
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate: [[NSDate alloc] init]];
+    NSInteger hour = [components hour];
+    NSInteger minute = [components minute];
+    self.actualHour   = (int)hour;
+    self.actualMinute = (int)minute;
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:self.actualHour forKey:@"hourSelected"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.actualMinute forKey:@"minuteSelected"];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"hoursSegue"]) {
-        _digitsHours = [[NSMutableArray alloc] initWithCapacity:13];
-        for (int i=0; i<=12; i++) {
+        _digitsHours = [[NSMutableArray alloc] initWithCapacity:25];
+        for (int i=0; i<=24; i++) {
             NSNumber* xWrapped = [NSNumber numberWithInt:i];
             [_digitsHours addObject:xWrapped];
         }
         
         TCNumbersTableViewController *vc = [segue destinationViewController];
-        vc.addZeros = false;
         vc.digits = _digitsHours;
         self.hoursView = vc;
     }
@@ -45,7 +54,6 @@
         
         TCNumbersTableViewController *vc = [segue destinationViewController];
         vc.digits = _digitsMinutes;
-        vc.addZeros = true;
         self.minutesView = vc;
     }
 }

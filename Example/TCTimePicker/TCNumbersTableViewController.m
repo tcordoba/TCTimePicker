@@ -25,8 +25,28 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSDate *date = [[NSDate alloc] init];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate: date];
+    NSInteger hour = [components hour];
+    NSInteger minute = [components minute];
+    
+    if([self.digits count] == 25){ //Is the hours table
+        NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow: hour+1 inSection:30];
+        [[self tableView] scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    
+    if([self.digits count] == 60){ //Is the hours table
+        NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow: minute+1 inSection:30];
+        [[self tableView] scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 60;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -38,10 +58,20 @@
     
     TCNumberViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if(_addZeros)
-        cell.numberLabel.text = [NSString stringWithFormat:@"%02d", [[self.digits objectAtIndex: indexPath.row] intValue] ];
-    else
-        cell.numberLabel.text = [NSString stringWithFormat:@"%d", [[self.digits objectAtIndex: indexPath.row] intValue]];
+    NSString *body = [NSString stringWithFormat:@"%02d",  (int)indexPath.row];
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: body];    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setAlignment:NSTextAlignmentCenter];
+    
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, 2)];
+    
+    cell.numberLabel.attributedText = attributedString;
+    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.numberLabel.numberOfLines = 1;
+    cell.numberLabel.minimumScaleFactor = 0.5;
+    cell.numberLabel.adjustsFontSizeToFitWidth = YES;
     
     return cell;
 }
@@ -59,20 +89,36 @@
         cellIndex++;
     }
     
+    // Calculate selected value
+    int value = (int)cellIndex +1;
+    
+    NSIndexPath * path = [self.tableView indexPathForCell:[[self.tableView visibleCells] objectAtIndex:1]];
+    NSUInteger sectionNumber = path.section;
+    
+    if(value >= [self.digits count]){
+        
+        value = value - ((int)[self.digits count] * (int)sectionNumber);
+        if(value == [self.digits count]){
+            value = 0;
+        }
+    }
+    
+    // Save value selected
+    if([self.digits count] == 25){ //Is the hours table
+        [[NSUserDefaults standardUserDefaults] setInteger:value forKey:@"hourSelected"];
+    }
+    if([self.digits count] == 60){ //Is the hours table
+        [[NSUserDefaults standardUserDefaults] setInteger:value forKey:@"minuteSelected"];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     // Adjust stopping point to exact beginning of cell.
     targetContentOffset->y = cellIndex * cellHeight;
-
+    
+    NSLog(@"%ld:%ld", [[NSUserDefaults standardUserDefaults] integerForKey:@"hourSelected"], (long)[[NSUserDefaults standardUserDefaults] integerForKey:@"minuteSelected"]);
 }
 
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView_
-{
-    CGFloat actualPosition = scrollView_.contentOffset.y;
-    CGFloat contentHeight = scrollView_.contentSize.height - (700);
-    if (actualPosition >= contentHeight) {
-        [self.digits addObjectsFromArray:self.digits];
-        [self.tableView reloadData];
-    }
-}
+
 @end

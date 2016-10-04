@@ -11,6 +11,9 @@
 
 @interface TCViewController : UIViewController
 
+@property (nonatomic) int actualMinute;
+@property (nonatomic) int actualHour;
+
 @property(nonatomic,retain)NSMutableArray *digitsHours;
 @property(nonatomic,retain)NSMutableArray *digitsMinutes;
 
